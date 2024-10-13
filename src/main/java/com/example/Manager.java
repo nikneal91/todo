@@ -16,11 +16,17 @@ public class Manager<T extends Printable & Comparable<T>> {
         this.tasks = tasks;
     }
 
+    public int getSize() {
+        return this.tasks.size();
+    }
+
+
+
     public void printDetails(Optional<Callback> call) {
         for ( T t : tasks) {
             t.print();
         }
-        if ( call.isPresent()) {
+        if ( call!=null && call.isPresent()) {
             call.get().callback();
         }
 

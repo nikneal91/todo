@@ -1,6 +1,7 @@
 package com.example.dp;
 
 import com.example.Event;
+import com.example.SimpleTask;
 import com.example.Task;
 
 public class TodoEventConverter extends Converter<Task, Event> {
@@ -10,7 +11,11 @@ public class TodoEventConverter extends Converter<Task, Event> {
     }
 
     private static Task convertToDto(Event user) {
-        return new Task(user.getEventid(), user.getEventname(), user.getDescription(), user.getEventDate());
+        return convertToDtoWithFactory(user,new SimpleTaskFactory()); 
+    }
+
+    private static Task convertToDtoWithFactory(Event user, TaskFactory tf) {
+        return tf.createTask( user.getEventname(), user.getDescription());
     }
 
     private static Event convertToEntity(Task dto) {
